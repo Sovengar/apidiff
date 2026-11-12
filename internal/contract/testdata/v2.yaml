@@ -1,0 +1,58 @@
+openapi: 3.0.3
+info:
+  title: Widgets API
+  version: 2.0.0
+paths:
+  /widgets:
+    get:
+      operationId: listWidgets
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Widget'
+    post:
+      operationId: createWidget
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewWidget'
+      responses:
+        '201':
+          description: created
+  /widgets/search:
+    get:
+      operationId: searchWidgets
+      responses:
+        '200':
+          description: ok
+components:
+  schemas:
+    Widget:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    NewWidget:
+      type: object
+      required:
+        - name
+        - color
+      properties:
+        name:
+          type: string
+        color:
+          type: string
+        notes:
+          type: string
